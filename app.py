@@ -7,7 +7,6 @@ import re
 from pathlib import Path
 
 
-
 # Import fast.ai Library
 from fastai import *
 from fastai.vision import *
@@ -21,14 +20,11 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 
-
 path = Path("path")
-classes = ['cleanwater', 'dirtywater']
+classes = ['bad', 'fake', 'good', 'science', 'tech', 'viral']
 data2 = ImageDataBunch.single_from_classes(path, classes, tfms=get_transforms(), size=224).normalize(imagenet_stats)
 learn = create_cnn(data2, models.resnet34)
-learn.load('stage-2')
-
-
+learn.load('news_model_v1')
 
 
 def model_predict(img_path):
@@ -40,9 +36,6 @@ def model_predict(img_path):
     pred_class,pred_idx,outputs = learn.predict(img)
     return pred_class
     
-
-
-
 
 @app.route('/', methods=['GET'])
 def index():
