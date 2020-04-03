@@ -22,8 +22,8 @@ app = Flask(__name__)
 
 path = Path("path")
 classes = ['bad', 'fake', 'good', 'science', 'tech', 'viral']
-data2 = ImageDataBunch.single_from_classes(path, classes, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
-learn = create_cnn(data2, models.resnet34)
+data2 = ImageDataBunch.single_from_classes(path, classes, ds_tfms=get_transforms(), size=225).normalize(imagenet_stats)
+learn = create_cnn(data2, models.resnet50)
 learn.load('news_model_v1')
 
 
